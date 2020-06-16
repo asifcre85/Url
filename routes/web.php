@@ -21,9 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth','admin']],function(){
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
+   
     Route::get('/roleRegister','Admin\DashboardController@registered');
     Route::get('/edit/{id}','Admin\DashboardController@edit');
     Route::put('/update/{id}','Admin\DashboardController@update');
@@ -34,9 +32,15 @@ Route::group(['middleware' => ['auth','admin']],function(){
     Route::put('/update2/{id}','Admin\AboutsController@update2');
     Route::delete('/delete2/{id}','Admin\AboutsController@delete2');
 
-    Route::get('generate-shorten-link', 'ShortLinkController@index');
+   
+
+});
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('generate-shorten-link', 'ShortLinkController@index');
 Route::post('generate-shorten-link', 'ShortLinkController@store')->name('generate.shorten.link.post');
    
 Route::get('{code}', 'ShortLinkController@shortenLink')->name('shorten.link');
-
-});
